@@ -16,10 +16,12 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".TodosOverviewActivity"
-            android:label="@string/title_activity_todos_overview"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <provider
+            android:authorities="com.practice.contentproviderpoc.OrdersContentProvider"
+            android:name="OrdersContentProvider"
+            android:exported="false"
+            ></provider>
+        
     </application>
 
 </manifest>

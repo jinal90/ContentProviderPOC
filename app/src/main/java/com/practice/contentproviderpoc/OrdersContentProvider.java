@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -46,7 +47,19 @@ public class OrdersContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+
+        Cursor cursor;
+
+        /*if(uriMatcher.match(uri) == ORDER){
+            cursor = db.query(TableOrderManager.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        }*/
+
+        db = dbHelper.getReadableDatabase();
+        cursor = db.query(TableOrderManager.TABLE_NAME, projection, selection, selectionArgs, null,
+                null, sortOrder);
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        return cursor;
     }
 
     @Nullable
@@ -58,6 +71,16 @@ public class OrdersContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+
+        db = dbHelper.getWritableDatabase();
+
+        if(uriMatcher.match(uri) == ORDER){
+            db.insert(TableOrderManager.TABLE_NAME, null, values);
+        }
+
+        db.close();
+
+        getContext().getContentResolver().notifyChange(uri, null);
         return null;
     }
 

@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TableOrderManager extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME = "TableOrders";
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "c_id";
     public static final String COLUMN_TABLE_ID = "table_id";
     public static final String COLUMN_FOOD_ITEM_ID = "item_id";
 

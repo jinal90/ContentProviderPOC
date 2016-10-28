@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContentProviderPOC</string>
+    <string name="title_activity_todos_overview">TodosOverviewActivity</string>
 </resources>
